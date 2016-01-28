@@ -1,0 +1,40 @@
+--Database structure
+--I have been unable to test this script as I have had trouble with getting sql express to work.
+
+CREATE TABLE Article(
+ArticleID bigint Identity(1,1) not null,
+Title nvarchar(150) not null,
+ArticleBody nvarchar(max) not null,
+Date dateTime not null,
+Author nvarchar(150) not null,
+CreatedOn dateTime not null,
+CreatedBy nvarchar(150) not null,
+PRIMARY KEY(ArticleID)
+)
+
+CREATE TABLE Employee(
+UserID int Identity(1,1) not null,
+FirstName nvarchar(max) not null,
+LastName nvarchar(max) not null,
+PRIMARY KEY(UserID)
+)
+
+
+CREATE TABLE Comment(
+ID bigint Identity(1,1) not null, 
+ArticleID bigint not null,
+UserID int not null,
+Message nvarchar(max) not null,
+PRIMARY KEY(ID)
+)
+--add FK Comment.ArticleID to Article.ArticleID
+--add FK Comment.UserID to Employee.UserID
+
+
+CREATE TABLE Likes(
+UserID int not null,
+ArticleID bigint not null,
+CONSTRAINT pk_CommentID PRIMARY KEY (ArticleID,UserID)
+)
+--add FK Comment.ArticleID to Article.ArticleID
+--add FK Comment.UserID to Employee.UserID
